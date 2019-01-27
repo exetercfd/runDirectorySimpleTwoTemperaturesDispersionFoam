@@ -1,0 +1,133 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.4.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     porousSimpleTwoTemperaturesDispersionFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         800;
+
+deltaT          1;
+
+writeControl    runTime;
+
+writeInterval   10;
+
+purgeWrite      0;
+
+writeFormat     ascii;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    residuals
+    {
+        type            residuals;
+        functionObjectLibs ("libutilityFunctionObjects.so");
+        enabled         true;
+        outputControl   timeStep;
+        outputInterval  1;
+
+        fields
+        (
+            U
+            p
+            Tf
+            Ts
+        );
+    }
+
+    calcFvcGrad
+    {
+        type            calcFvcGrad;
+        functionObjectLibs ("libFVFunctionObjects.so");
+        enabled         true;
+        writeControl   runTime;
+        writeInterval  10;
+
+        fieldName       "Tf";
+        resultName      "GradTf";
+ 
+    }
+
+    calcFvcGrad2
+    {
+        type            calcFvcGrad;
+        functionObjectLibs ("libFVFunctionObjects.so");
+        enabled         true;
+        writeControl   runTime;
+        writeInterval  10;
+
+        fieldName       "Ts";
+        resultName      "GradTs";
+ 
+    }
+    
+    probes
+    {
+ 
+        type		      probes;
+        functionObjectLibs    ("libsampling.so");
+        enabled		      true;
+        outputControl	      timeStep;
+        outputInterval	      1;
+        fields
+        (
+            U
+            p
+            Tf
+            Ts
+        );
+           
+        probeLocations
+        (
+            (0.068 0.005 0.0) // Probe 1 centreline
+            (0.076 0.005 0.0) // Probe 2 centreline
+            (0.084 0.005 0.0) // Probe 3 centreline
+            (0.092 0.005 0.0) // Probe 4 centreline
+            (0.100 0.005 0.0) // Probe 5 centreline
+            (0.068 0.010 0.0) // Probe 1 wall 
+            (0.076 0.010 0.0) // Probe 2 wall
+            (0.084 0.010 0.0) // Probe 3 wall
+            (0.092 0.010 0.0) // Probe 4 wall
+            (0.100 0.010 0.0) // Probe 5 wall
+        );
+    } 
+    
+}
+
+libs
+(
+    "libwallHeatFluxFluidFvPatchScalarField.so"
+    "libwallHeatFluxSolidFvPatchScalarField.so"
+);
+
+
+// ************************************************************************* //

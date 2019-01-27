@@ -1,0 +1,10 @@
+porousSimpleTwoTemperaturesDispersionFoam > log
+rm -rf `find -type d -name "*1"`
+rm -rf `find -type d -name "*2"`
+rm -rf `find -type d -name "*3"`
+rm -rf `find -type d -name "*4"`
+rm -rf `find -type d -name "*5"`
+rm -rf `find -type d -name "*6"`
+rm -rf `find -type d -name "*7"`
+rm -rf `find -type d -name "*8"`
+rm -rf `find -type d -name "*9"`

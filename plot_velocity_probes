@@ -1,0 +1,21 @@
+set terminal png
+set output "plot_velocity_probes.png"
+
+set xlabel "Iterations (-)"
+set ylabel "Magnitude of Velocity (m/s)"
+set key right center box 1 box opaque
+#set xtics 0,100,600
+
+plot 'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%lf %lf %lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf)" w l lc rgb "red" lt 1 title 'x=0.0049m, centre', \
+      'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%lf %lf %lf) (%lf %lf %lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf)" w l lt 0 lc rgb "red" title 'x=0.0189m, centre', \
+      'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%lf %lf %lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf)" w l lw 2 lc rgb "red" title 'x=0.0386m, centre', \
+      'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%lf %lf %lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf)" w l lt 0 lc rgb "red" title 'x=0.0816m, centre', \
+      'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%lf %lf %lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf)" w l lw 2 lc rgb "red" title 'x=0.1054m, centre', \
+       'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%lf %lf %lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf)" w l lc rgb "blue" lt 1 title 'x=0.0049m, wall', \
+      'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%lf %lf %lf) (%lf %lf %lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf)" w l lt 0 lc rgb "blue" title 'x=0.0189m, wall', \
+      'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%lf %lf %lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf)" w l lw 2 lc rgb "blue" title 'x=0.0386m, wall', \
+      'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%lf %lf %lf) (%*lf %*lf %*lf)" w l lt 0 lc rgb "blue" title 'x=0.0816m, wall', \
+      'postProcessing/probes/0/U' u 1:(($2**2)+($3**2)+($4**2))**(0.5) " %lf (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%*lf %*lf %*lf) (%lf %lf %lf)" w l lw 2 lc rgb "blue" title 'x=0.1054m, wall'
+
+#reread
+

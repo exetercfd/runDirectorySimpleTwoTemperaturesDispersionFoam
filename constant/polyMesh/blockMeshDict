@@ -1,0 +1,145 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.4.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+convertToMeters 1;
+
+// The vertices can be defined using variables Lx, Ly, Lz. It saves time to modify the size of the domain
+
+// boundary_layer =  [  2.50216694e-05   5.00433388e-05   1.00086678e-04   2.00173355e-04]
+// intermediate_layer =  [ 0.00497498  0.00494996  0.00489991  0.00479983]
+// upper_boundary_layer =  [ 0.00997498  0.00994996  0.00989991  0.00979983]
+
+// end_cell_first_layer = [ 0.0000043         ]
+// end_cell_first_layerx1.2 = [ 0.00000516          ]
+
+Lx 0.200;     // add the ends
+Lz 0.010;
+Dy1 2.50216694e-5;
+Dy2 0.005;
+Dy3 0.00997498;
+Dy4 0.01;
+
+
+vertices
+(
+    (0 0 0)
+    ($Lx 0 0)
+    ($Lx $Dy1 0)
+    (0 $Dy1 0)
+    (0 0 $Lz)
+    ($Lx 0 $Lz)
+    ($Lx $Dy1 $Lz)
+    (0 $Dy1 $Lz)
+    (0 $Dy2 0)
+    ($Lx $Dy2 0)
+    ($Lx $Dy3 0)
+    (0 $Dy3 0)
+    (0 $Dy2 $Lz)
+    ($Lx $Dy2 $Lz)
+    ($Lx $Dy3 $Lz)
+    (0 $Dy3 $Lz)        
+    (0 $Dy4 0)
+    ($Lx $Dy4 0)
+    ($Lx $Dy4 $Lz)
+    (0 $Dy4 $Lz)
+);
+
+// Mesh definition (homogeneous grid with a single cell in the y and z axis since the simulation is 1D)
+
+blocks
+(
+    hex (0 1 2 3 4 5 6 7) 
+    porosity (630 20 1) simpleGrading (1 32 1)
+    hex (3 2 9 8 7 6 13 12) 
+    porosity (630 70 1) simpleGrading (1 56 1)
+    hex (8 9 10 11 12 13 14 15) 
+    porosity (630 70 1) simpleGrading (1 0.01786 1)
+    hex (11 10 17 16 15 14 18 19) 
+    porosity (630 20 1) simpleGrading (1 0.03125 1)
+);
+
+edges
+(
+);
+
+boundary
+(
+    inlet
+    {
+        type patch;
+        faces
+        (
+            (0 4 7 3)
+            (3 7 12 8)
+            (8 12 15 11)
+            (11 15 19 16)
+
+        );
+    }
+    
+    outlet
+    {
+        type patch;
+        faces
+        (
+            (1 2 6 5)
+            (2 9 13 6)
+            (9 10 14 13)
+            (10 17 18 14)
+        );
+    }
+
+    wall_upper
+    {
+        type wall;
+        faces
+        (
+            (16 19 18 17)
+        );
+    }
+
+    wall_lower
+    {
+        type wall;
+        faces
+        (
+            (0 1 5 4)
+        );
+    }
+
+    frontAndBack
+    {
+        type empty;
+        faces
+        (
+            (4 5 6 7)
+            (7 6 13 12)
+            (12 13 14 15)
+            (15 14 18 19)
+            (0 3 2 1)
+            (3 8 9 2)
+            (8 11 10 9)
+            (11 16 17 10)
+        );
+    }
+
+);
+
+mergePatchPairs
+(
+);
+
+// ************************************************************************* //

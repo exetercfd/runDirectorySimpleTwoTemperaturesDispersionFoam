@@ -1,0 +1,23 @@
+set terminal png
+set output "plot_p_probes.png"
+
+set xlabel "Iterations (-)"
+set ylabel "Pressure, P (Pa)"
+set key right bottom box 1 box opaque
+#set xtics 0,125000,500000
+#set yrange [-30:30]
+plot "postProcessing/probes/0/p" using 1:2 with lines lc rgb "red" lt 1 title "x=0.0049m, centre" ,\
+	 "postProcessing/probes/0/p" using 1:3 with lines lt 0 lc rgb "red" title "x=0.0189m, centre" ,\
+	 "postProcessing/probes/0/p" using 1:4 with lines lw 2 lc rgb "red" title "x=0.0386m, centre" ,\
+	 "postProcessing/probes/0/p" using 1:5 with lines lt 0 lw 2 lc rgb "red" title "x=0.0816m, centre" ,\
+	 "postProcessing/probes/0/p" using 1:6 with lines lw 3 lc rgb "red" title "x=0.1054m, centre" ,\
+	 "postProcessing/probes/0/p" using 1:7 with lines lc rgb "blue" lt 1 title "x=0.0049m, wall" ,\
+	 "postProcessing/probes/0/p" using 1:8 with lines lt 0 lc rgb "blue" title "x=0.0189m, wall" ,\
+	 "postProcessing/probes/0/p" using 1:9 with lines lw 2 lc rgb "blue" title "x=0.0386m, wall" ,\
+ 	 "postProcessing/probes/0/p" using 1:10 with lines lt 0 lw 2 lc rgb "blue" title "x=0.0816m, wall" ,\
+	 "postProcessing/probes/0/p" using 1:11 with lines lw 3 lc rgb "blue" title "x=0.1054m, wall"
+
+
+
+
+#reread
